@@ -9,6 +9,7 @@ const handler = NextAuth(AuthOptions);
         id: string;
         name: string;
         email: string;
+        accessToken:string;
       } & DefaultSession["user"];
     }
   }
