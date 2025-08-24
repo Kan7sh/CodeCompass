@@ -8,6 +8,27 @@
       "when": 1755709729398,
       "tag": "0000_panoramic_zarek",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1756036783073,
+      "tag": "0001_graceful_chameleon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756046667091,
+      "tag": "0002_parallel_namora",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1756048032788,
+      "tag": "0003_easy_scream",
+      "breakpoints": true
     }
   ]
 }

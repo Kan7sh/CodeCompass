@@ -16,5 +16,6 @@ export const UserTable = pgTable("user", {
     .notNull()
     .defaultNow()
     .$onUpdate(() => new Date()),
-  githubId: varchar(),
+    githubId: varchar(),
+  accessToken: varchar(),
 });
