@@ -9,4 +9,5 @@ export const MonitoringRepo = pgTable("monitoringRepo", {
   repoName: varchar().notNull(),
   branchName: varchar().notNull(),
   webhookId: integer().notNull(),
+  customPrompt: varchar(),
 });

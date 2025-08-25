@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     repoName: body.repoName,
     branchName: body.branchName,
     webhookId: body.webhookId,
+    customPrompt: body.customPrompt,
   });
   return NextResponse.json({ ok: true });
 }

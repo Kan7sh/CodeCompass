@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 
 type Repo = {
   id: number;
@@ -50,6 +51,7 @@ export default function RepositoriesPage() {
   const [branches, setBranches] = useState<Branch[]>([]);
   const [isBranchesLoading, setBranchesLoading] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState<string>("");
+  const [customPrompt, setCustomPrompt] = useState<string>(""); // <-- new state
 
   const [activeRepos, setActiveRepos] = useState<MonitoringRecord[]>([]);
 
@@ -98,6 +100,7 @@ export default function RepositoriesPage() {
     setSelectedRepo(repo);
     setBranches([]);
     setSelectedBranch("");
+    setCustomPrompt("");
     setBranchesLoading(true);
     setOpenDialog(true);
 
@@ -137,7 +140,7 @@ export default function RepositoriesPage() {
           active: true,
           events: ["pull_request"],
           config: {
-            url: `https://5acc6de96e9b.ngrok-free.app/api/github/webhook`,
+            url: `https://f8eef3ce8ba5.ngrok-free.app/api/github/webhook`,
             content_type: "json",
             secret: "super-secret",
             insecure_ssl: "0",
@@ -174,6 +177,7 @@ export default function RepositoriesPage() {
           repoName: `${selectedRepo.owner.login}/${repo}`, // store with owner
           branchName: branch,
           webhookId,
+          customPrompt,
         }),
       });
 
@@ -350,6 +354,20 @@ export default function RepositoriesPage() {
           {!isBranchesLoading && branches.length === 0 && (
             <div className="text-gray-600">No branches found.</div>
           )}
+
+          {/* Custom prompt input */}
+          <div className="mt-4">
+            <Label htmlFor="customPrompt">
+              Instructions for code review (optional)
+            </Label>
+            <Textarea
+              id="customPrompt"
+              value={customPrompt}
+              onChange={(e) => setCustomPrompt(e.target.value)}
+              placeholder="e.g. Focus on performance, security best practices, or readability..."
+              className="mt-2"
+            />
+          </div>
 
           <DialogFooter className="mt-4">
             <Button

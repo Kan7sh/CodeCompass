@@ -1,0 +1,1 @@
+ALTER TABLE "monitoringRepo" ADD COLUMN "customPrompt" varchar;
