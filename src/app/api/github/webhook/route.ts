@@ -3,7 +3,7 @@ import { MonitoringRepo, UserTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 
-const HF_TOKEN = process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY; // Hugging Face Inference API key
+const HF_TOKEN = process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY;
 
 export async function POST(req: NextRequest) {
   console.log("Webhook POST endpoint hit");
@@ -107,13 +107,15 @@ export async function POST(req: NextRequest) {
       "AI review could not be generated.";
     console.log("Final AI review text:", reviewText);
 
+    const botToken = process.env.NEXT_PUBLIC_GITHUB_BOT_TOKEN;
+
     // 4. Post review comment back to GitHub
     const commentRes = await fetch(
       `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`,
       {
         method: "POST",
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
+          Authorization: `token ${botToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ body: reviewText }),
